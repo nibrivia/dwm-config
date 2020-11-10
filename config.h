@@ -79,6 +79,9 @@ static const char *brightnessinc[]  = { "brightnessctl", "s", "5%+", NULL };
 static const char *brightnessdec[]  = { "brightnessctl", "s", "5%-", NULL };
 static const char *poweroff[]  = { "poweroff", NULL };
 static const char *autodisplay[] = { "/home/nibr/bin/auto-display", NULL };
+static const char *wifitoggle[] = { "/home/nibr/bin/wifi-toggle", NULL };
+static const char *nolap[] = { "autorandr", "-c", "nolap", NULL };
+static const char *xe242[] = { "autorandr", "-c", "E242", NULL };
 static const char *logout[]  = { "bash", "-c", "/usr/bin/pkill -P $( pgrep .xsession )", NULL };
 
 
@@ -123,13 +126,25 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockcmd} },
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = muttcmd} },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = cambcmd} },
-	{ 0,        XF86XK_MonBrightnessDown,      spawn,          {.v = brightnessdec} },
-	{ 0,          XF86XK_MonBrightnessUp,      spawn,          {.v = brightnessinc} },
-	{ 0,         XF86XK_AudioLowerVolume,      spawn,          {.v = volumedec} },
-	{ 0,         XF86XK_AudioRaiseVolume,      spawn,          {.v = volumeinc} },
+	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = nolap} },
+	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = xe242} },
+
 	{ 0,                XF86XK_AudioMute,      spawn,          {.v = volumeoff} },
+	{ Mod4Mask,                    XK_F1,      spawn,          {.v = volumeoff} },
+	{ 0,         XF86XK_AudioLowerVolume,      spawn,          {.v = volumedec} },
+	{ Mod4Mask,                    XK_F2,      spawn,          {.v = volumedec} },
+	{ 0,         XF86XK_AudioRaiseVolume,      spawn,          {.v = volumeinc} },
+	{ Mod4Mask,                    XK_F3,      spawn,          {.v = volumeinc} },
 	{ 0,             XF86XK_AudioMicMute,      spawn,          {.v = micoff} },
+	{ Mod4Mask,                    XK_F4,      spawn,          {.v = micoff} },
+
+	{ 0,        XF86XK_MonBrightnessDown,      spawn,          {.v = brightnessdec} },
+	{ Mod4Mask,                    XK_F5,      spawn,          {.v = brightnessdec} },
+	{ 0,          XF86XK_MonBrightnessUp,      spawn,          {.v = brightnessinc} },
+	{ Mod4Mask,                    XK_F6,      spawn,          {.v = brightnessinc} },
 	{ 0,                  XF86XK_Display,      spawn,          {.v = autodisplay} },
+	{ Mod4Mask,                    XK_F7,      spawn,          {.v = autodisplay} },
+
 	{ MODKEY|ShiftMask,             XK_r,      spawn,          {.v = rstudiocmd} },
 	{ MODKEY|ShiftMask,             XK_k,      spawn,          {.v = slackcmd} },
 	{ MODKEY|ShiftMask,        XK_Delete,      spawn,          {.v = poweroff} },
