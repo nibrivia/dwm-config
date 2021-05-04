@@ -67,6 +67,7 @@ static const char *termcmd[]  = { "terminator", NULL };
 static const char *ffxcmd[]   = { "firefox", NULL };
 static const char *ffxprivcmd[]   = { "firefox", "--private-window", NULL };
 static const char *lockcmd[]  = { "slock", NULL };
+static const char *locksuscmd[]  = { "slock", "systemctl", "suspend", "-i", NULL };
 static const char *muttcmd[]  = { "terminator", "--title=mutt", "-e", "mutt", NULL };
 static const char *cambcmd[]  = { "terminator", "--profile=highdpi", "-e", "sshpass -f ~/.ssh/ssh_pass ssh -X nibr@cambridge.csail.mit.edu", NULL };
 static const char *signalcmd[]  = { "signal-desktop", NULL };
@@ -130,6 +131,7 @@ static Key keys[] = {
 	{ ControlMask|ShiftMask,        XK_p,      spawn,          {.v = ffxprivcmd} },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = signalcmd} },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockcmd} },
+	{ Mod4Mask|ShiftMask,           XK_l,      spawn,          {.v = locksuscmd} },
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = muttcmd} },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = cambcmd} },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = nolap} },
