@@ -65,6 +65,7 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "terminator", NULL };
 static const char *ffxcmd[]   = { "firefox", NULL };
+static const char *ffxprivcmd[]   = { "firefox", "--private-window", NULL };
 static const char *lockcmd[]  = { "slock", NULL };
 static const char *muttcmd[]  = { "terminator", "--title=mutt", "-e", "mutt", NULL };
 static const char *cambcmd[]  = { "terminator", "--profile=highdpi", "-e", "sshpass -f ~/.ssh/ssh_pass ssh -X nibr@cambridge.csail.mit.edu", NULL };
@@ -75,14 +76,17 @@ static const char *volumedec[]  = { "/home/nibr/bin/volume-control", "down", NUL
 static const char *volumeoff[]  = { "/home/nibr/bin/volume-control", "mute", NULL };
 static const char *micoff[]  = { "/home/nibr/bin/volume-control", "micmute", NULL };
 static const char *slackcmd[]  = { "/snap/bin/slack", NULL };
-static const char *brightnessinc[]  = { "brightnessctl", "s", "5%+", NULL };
-static const char *brightnessdec[]  = { "brightnessctl", "s", "5%-", NULL };
+static const char *brightnessinc[]  = { "brightnessctl", "-e", "s", "2%+", NULL };
+static const char *brightnessmax[]  = { "brightnessctl", "-e", "s", "100%", NULL };
+static const char *brightnessdec[]  = { "brightnessctl", "-e", "s", "2%-", NULL };
+static const char *brightnessmin[]  = { "brightnessctl", "-e", "s", "1%", NULL };
 static const char *poweroff[]  = { "poweroff", NULL };
 static const char *autodisplay[] = { "/home/nibr/bin/auto-display", NULL };
 static const char *wifitoggle[] = { "/home/nibr/bin/wifi-toggle", NULL };
 static const char *nolap[] = { "autorandr", "-c", "nolap", NULL };
 static const char *xe242[] = { "autorandr", "-c", "E242", NULL };
 static const char *logout[]  = { "bash", "-c", "/usr/bin/pkill -P $( pgrep .xsession )", NULL };
+static const char *dunstpause[]  = { "dunstctl", "set-paused", "toggle", NULL};
 
 
 static Key keys[] = {
@@ -121,13 +125,16 @@ static Key keys[] = {
 	TAGKEYS(                        XK_7,                      6)
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
+
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = ffxcmd} },
+	{ ControlMask|ShiftMask,        XK_p,      spawn,          {.v = ffxprivcmd} },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = signalcmd} },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockcmd} },
 	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = muttcmd} },
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = cambcmd} },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = nolap} },
 	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = xe242} },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dunstpause} },
 
 	{ 0,                XF86XK_AudioMute,      spawn,          {.v = volumeoff} },
 	{ Mod4Mask,                    XK_F1,      spawn,          {.v = volumeoff} },
@@ -139,8 +146,10 @@ static Key keys[] = {
 	{ Mod4Mask,                    XK_F4,      spawn,          {.v = micoff} },
 
 	{ 0,        XF86XK_MonBrightnessDown,      spawn,          {.v = brightnessdec} },
+	{ ShiftMask,XF86XK_MonBrightnessDown,      spawn,          {.v = brightnessmin} },
 	{ Mod4Mask,                    XK_F5,      spawn,          {.v = brightnessdec} },
 	{ 0,          XF86XK_MonBrightnessUp,      spawn,          {.v = brightnessinc} },
+	{ ShiftMask,  XF86XK_MonBrightnessUp,      spawn,          {.v = brightnessmax} },
 	{ Mod4Mask,                    XK_F6,      spawn,          {.v = brightnessinc} },
 	{ 0,                  XF86XK_Display,      spawn,          {.v = autodisplay} },
 	{ Mod4Mask,                    XK_F7,      spawn,          {.v = autodisplay} },
