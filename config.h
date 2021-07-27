@@ -88,6 +88,7 @@ static const char *nolap[] = { "autorandr", "-c", "nolap", NULL };
 static const char *xe242[] = { "autorandr", "-c", "E242", NULL };
 static const char *logout[]  = { "bash", "-c", "/usr/bin/pkill -P $( pgrep .xsession )", NULL };
 static const char *dunstpause[]  = { "dunstctl", "set-paused", "toggle", NULL};
+static const char *killslack[]  = { "killall", "slack", NULL};
 
 
 static Key keys[] = {
@@ -137,6 +138,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = nolap} },
 	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = xe242} },
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dunstpause} },
+	{ MODKEY|ShiftMask,             XK_z,      spawn,          {.v = killslack} },
 
 	{ 0,                XF86XK_AudioMute,      spawn,          {.v = volumeoff} },
 	{ Mod4Mask,                    XK_F1,      spawn,          {.v = volumeoff} },
