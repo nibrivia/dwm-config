@@ -33,6 +33,7 @@ static const Rule rules[] = {
 	{ "Caprine",  NULL,       NULL,       1 << 7,       0,           -1 },
 	{ "RStudio",  NULL,       NULL,       1 << 4,       0,           -1 },
 	{ "Slack",    NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Peek",     NULL,       NULL,            0,       1,           -1 },
 	{ NULL,       NULL,     "mutt",       1 << 8,       0,           -1 },
 
 };
@@ -89,6 +90,8 @@ static const char *xe242[] = { "autorandr", "-c", "E242", NULL };
 static const char *logout[]  = { "bash", "-c", "/usr/bin/pkill -P $( pgrep .xsession )", NULL };
 static const char *dunstpause[]  = { "dunstctl", "set-paused", "toggle", NULL};
 static const char *killslack[]  = { "killall", "slack", NULL};
+static const char *connectMPOW[]  =  { "bluetoothctl", "connect", "E9:08:EF:64:D4:44", NULL};
+
 
 
 static Key keys[] = {
@@ -148,6 +151,8 @@ static Key keys[] = {
 	{ Mod4Mask,                    XK_F3,      spawn,          {.v = volumeinc} },
 	{ 0,             XF86XK_AudioMicMute,      spawn,          {.v = micoff} },
 	{ Mod4Mask,                    XK_F4,      spawn,          {.v = micoff} },
+	{ 0,                XF86XK_Favorites,      spawn,          {.v = connectMPOW} },
+	{ Mod4Mask,                   XK_F12,      spawn,          {.v = connectMPOW} },
 
 	{ 0,        XF86XK_MonBrightnessDown,      spawn,          {.v = brightnessdec} },
 	{ ShiftMask,XF86XK_MonBrightnessDown,      spawn,          {.v = brightnessmin} },
