@@ -89,6 +89,9 @@ static const char *nolap[] = { "autorandr", "-c", "nolap", NULL };
 static const char *xe242[] = { "autorandr", "-c", "E242", NULL };
 static const char *logout[]  = { "bash", "-c", "/usr/bin/pkill -P $( pgrep .xsession )", NULL };
 static const char *dunstpause[]  = { "dunstctl", "set-paused", "toggle", NULL};
+static const char *dunstclose[]  = { "dunstctl", "close", NULL};
+static const char *dunstcloseall[]  = { "dunstctl", "close-all", NULL};
+static const char *dunstpop[]  = { "dunstctl", "history-pop", NULL};
 static const char *killslack[]  = { "killall", "slack", NULL};
 static const char *connectMPOW[]  =  { "bluetoothctl", "connect", "E9:08:EF:64:D4:44", NULL};
 
@@ -140,8 +143,12 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = cambcmd} },
 	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = nolap} },
 	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = xe242} },
-	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dunstpause} },
 	{ MODKEY|ShiftMask,             XK_z,      spawn,          {.v = killslack} },
+
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dunstpause} },
+	{ ControlMask,              XK_space,      spawn,          {.v = dunstclose} },
+	{ ControlMask|ShiftMask,    XK_space,      spawn,          {.v = dunstcloseall} },
+	{ ControlMask,              XK_grave,      spawn,          {.v = dunstpop} },
 
 	{ 0,                XF86XK_AudioMute,      spawn,          {.v = volumeoff} },
 	{ Mod4Mask,                    XK_F1,      spawn,          {.v = volumeoff} },
