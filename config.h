@@ -94,6 +94,8 @@ static const char *dunstcloseall[]  = { "dunstctl", "close-all", NULL};
 static const char *dunstpop[]  = { "dunstctl", "history-pop", NULL};
 static const char *killslack[]  = { "killall", "slack", NULL};
 static const char *connectMPOW[]  =  { "bluetoothctl", "connect", "E9:08:EF:64:D4:44", NULL};
+static const char *peek[]  =  { "peek", NULL};
+static const char *playpause[]  =  { "playerctl", "play-pause", NULL};
 
 
 
@@ -146,6 +148,7 @@ static Key keys[] = {
 	{ MODKEY|ShiftMask,             XK_z,      spawn,          {.v = killslack} },
 
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dunstpause} },
+
 	{ ControlMask,              XK_space,      spawn,          {.v = dunstclose} },
 	{ ControlMask|ShiftMask,    XK_space,      spawn,          {.v = dunstcloseall} },
 	{ ControlMask,              XK_grave,      spawn,          {.v = dunstpop} },
@@ -160,6 +163,10 @@ static Key keys[] = {
 	{ Mod4Mask,                    XK_F4,      spawn,          {.v = micoff} },
 	{ 0,                XF86XK_Favorites,      spawn,          {.v = connectMPOW} },
 	{ Mod4Mask,                   XK_F12,      spawn,          {.v = connectMPOW} },
+	{ 0,                    XF86XK_Tools,      spawn,          {.v = playpause} },
+	{ Mod4Mask,                    XK_F9,      spawn,          {.v = playpause} },
+
+	{ 0,                        XK_Print,      spawn,          {.v = peek} },
 
 	{ 0,        XF86XK_MonBrightnessDown,      spawn,          {.v = brightnessdec} },
 	{ ShiftMask,XF86XK_MonBrightnessDown,      spawn,          {.v = brightnessmin} },
