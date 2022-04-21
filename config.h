@@ -29,6 +29,7 @@ static const Rule rules[] = {
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
 	{ "Zoom",     NULL,       NULL,       1 << 6,       0,           -1 },
+	{ NULL,       NULL,       "zoom",          0,       1,           -1 },
 	{ "Signal",   NULL,       NULL,       1 << 7,       0,           -1 },
 	{ "Caprine",  NULL,       NULL,       1 << 7,       0,           -1 },
 	{ "RStudio",  NULL,       NULL,       1 << 4,       0,           -1 },
