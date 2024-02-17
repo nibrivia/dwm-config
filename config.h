@@ -66,6 +66,7 @@ static const Layout layouts[] = {
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
 static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", col_gray1, "-nf", col_gray3, "-sb", col_cyan, "-sf", col_gray4, NULL };
 static const char *termcmd[]  = { "terminator", NULL };
+static const char *xtermcmd[]  = { "st", NULL };
 static const char *ffxcmd[]   = { "firefox", NULL };
 static const char *ffxprivcmd[]   = { "firefox", "--private-window", NULL };
 static const char *lockcmd[]  = { "slock", NULL };
@@ -96,6 +97,7 @@ static const char *dunstpop[]  = { "dunstctl", "history-pop", NULL};
 static const char *killslack[]  = { "killall", "slack", NULL};
 static const char *connectMPOW[]  =  { "bluetoothctl", "connect", "E9:08:EF:64:D4:44", NULL};
 static const char *peek[]  =  { "peek", NULL};
+static const char *vscodecmd[]  =  { "code", NULL};
 static const char *playpause[]  =  { "playerctl", "play-pause", NULL};
 static const char *nexttrack[]  =  { "playerctl", "next", NULL};
 static const char *prevtrack[]  =  { "playerctl", "previous", NULL};
@@ -105,7 +107,8 @@ static const char *prevtrack[]  =  { "playerctl", "previous", NULL};
 static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
-	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = xtermcmd } },
+	{ MODKEY|Mod4Mask,              XK_Return, spawn,          {.v = xtermcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -139,19 +142,19 @@ static Key keys[] = {
 	TAGKEYS(                        XK_8,                      7)
 	TAGKEYS(                        XK_9,                      8)
 
+	{ MODKEY|ShiftMask,             XK_o,      spawn,          {.v = vscodecmd} },
 	{ MODKEY|ShiftMask,             XK_f,      spawn,          {.v = ffxcmd} },
 	{ ControlMask|ShiftMask,        XK_p,      spawn,          {.v = ffxprivcmd} },
 	{ MODKEY|ShiftMask,             XK_s,      spawn,          {.v = signalcmd} },
 	{ MODKEY|ShiftMask,             XK_l,      spawn,          {.v = lockcmd} },
 	{ Mod4Mask|ShiftMask,           XK_l,      spawn,          {.v = locksuscmd} },
-	{ MODKEY|ShiftMask,             XK_m,      spawn,          {.v = muttcmd} },
-	{ MODKEY|ShiftMask,             XK_b,      spawn,          {.v = cambcmd} },
-	{ MODKEY|ShiftMask,             XK_n,      spawn,          {.v = nolap} },
-	{ MODKEY|ShiftMask,             XK_e,      spawn,          {.v = xe242} },
+	// { MODKEY|ShiftMask,             XK_m,      spawn,          {.v = muttcmd} },
+	// { MODKEY|ShiftMask,             XK_b,      spawn,          {.v = cambcmd} },
+	// { MODKEY|ShiftMask,             XK_n,      spawn,          {.v = nolap} },
+	// { MODKEY|ShiftMask,             XK_e,      spawn,          {.v = xe242} },
 	{ MODKEY|ShiftMask,             XK_z,      spawn,          {.v = killslack} },
 
 	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dunstpause} },
-
 	{ ControlMask,              XK_space,      spawn,          {.v = dunstclose} },
 	{ ControlMask|ShiftMask,    XK_space,      spawn,          {.v = dunstcloseall} },
 	{ ControlMask,              XK_grave,      spawn,          {.v = dunstpop} },
